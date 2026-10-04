@@ -54,10 +54,18 @@ module.exports.validateReview = (req, res, next) => {
 
 module.exports.isReviewAuthor = async (req, res, next) => {
   let { reviewId } = req.params;
+
   let review = await Review.findById(reviewId);
+
+  if (!review) {
+    req.flash("error", "Review not found");
+    return res.redirect(`/listings/${req.params.id}`);
+  }
+
   if (!review.author.equals(res.locals.currUser._id)) {
     req.flash("error", "You are not the author of this review");
     return res.redirect(`/listings/${req.params.id}`);
   }
+
   next();
 };
