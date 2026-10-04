@@ -1,0 +1,620 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  /* =========================
+     LISTINGS PAGE
+  ========================= */
+
+  .listings-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+
+  /* =========================
+     FILTER BAR
+  ========================= */
+
+  #filters {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    padding: 0.8rem 0 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+
+  /* =========================
+     FILTER ITEM
+  ========================= */
+
+  .filter {
+    min-width: 55px;
+    text-align: center;
+    text-decoration: none !important;
+    color: #555 !important;
+    opacity: 0.75;
+    cursor: pointer;
+    transition: 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    color: #222 !important;
+  }
+
+  .filter.active {
+    opacity: 1;
+    color: #222 !important;
+  }
+
+  .filter i {
+    font-size: 1.15rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .filter p {
+    font-size: 0.75rem;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+
+  /* =========================
+     TAX TOGGLE
+  ========================= */
+
+  .tax-toggle {
+    margin-left: auto;
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+    padding: 0.65rem 1rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    background-color: white;
+    flex-shrink: 0;
+  }
+
+  .tax-toggle .form-check {
+    margin: 0;
+    min-height: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .tax-toggle .form-check-input {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .tax-toggle .form-check-label {
+    font-size: 0.85rem;
+    color: #333;
+    cursor: pointer;
+  }
+
+
+  /* =========================
+     SEARCH RESULT
+  ========================= */
+
+  .search-result {
+    margin: 0.5rem 0 1.5rem;
+  }
+
+  .search-result h4 {
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+  }
+
+  .search-result p {
+    margin: 0;
+    color: #666;
+  }
+
+
+  /* =========================
+     LISTING GRID
+  ========================= */
+
+  .listings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 1.5rem;
+    row-gap: 2rem;
+  }
+
+
+  /* =========================
+     LISTING CARD
+  ========================= */
+
+  .listing-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+  }
+
+  .listing-card {
+    border: none !important;
+    background: transparent !important;
+    margin: 0 !important;
+    width: 100%;
+  }
+
+
+  /* =========================
+     LISTING IMAGE
+  ========================= */
+
+  .listing-card .card-img-top {
+    width: 100% !important;
+    height: 20rem !important;
+    object-fit: cover !important;
+    border-radius: 0.9rem !important;
+    display: block;
+  }
+
+
+  /* =========================
+     IMAGE HOVER
+  ========================= */
+
+  .listing-card .card-img-overlay {
+    border-radius: 0.9rem;
+    opacity: 0;
+    transition: 0.2s ease;
+  }
+
+  .listing-card:hover .card-img-overlay {
+    opacity: 0.12;
+    background-color: white;
+  }
+
+
+  /* =========================
+     CARD BODY
+  ========================= */
+
+  .listing-card .card-body {
+    padding: 0.45rem 0.05rem 0 !important;
+  }
+
+  .listing-card .card-text {
+    margin: 0;
+    line-height: 1.45;
+    color: #222;
+    font-size: 0.95rem;
+  }
+
+  .listing-card .card-text b {
+    font-weight: 600;
+  }
+
+
+  /* =========================
+     PRICE
+  ========================= */
+
+  .listing-price {
+    display: inline-block;
+    margin-top: 0.1rem;
+    color: #333;
+  }
+
+
+  /* =========================
+     TAX INFORMATION
+  ========================= */
+
+  .tax-info {
+    display: none;
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+
+  /* =========================
+     NO LISTINGS
+  ========================= */
+
+  .no-listings {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 1rem;
+  }
+
+  .no-listings h4 {
+    margin-bottom: 0.75rem;
+  }
+
+  .no-listings p {
+    color: #666;
+    margin-bottom: 1.25rem;
+  }
+
+
+  /* =========================
+     TABLET
+  ========================= */
+
+  @media (max-width: 1100px) {
+
+    #filters {
+      gap: 1.2rem;
+    }
+
+    .listings-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+  }
+
+
+  /* =========================
+     MOBILE
+  ========================= */
+
+  @media (max-width: 768px) {
+
+    .listings-page {
+      width: 100%;
+    }
+
+    #filters {
+      gap: 1rem;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 0.8rem;
+    }
+
+    #filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter {
+      min-width: 55px;
+    }
+
+    .tax-toggle {
+      margin-left: 0;
+    }
+
+    .listings-grid {
+      grid-template-columns: 1fr;
+      row-gap: 1.5rem;
+    }
+
+    .listing-card .card-img-top {
+      height: 19rem !important;
+    }
+
+  }
+</style>
+
+
+<div class="listings-page">
+
+  <!-- =========================
+       FILTERS
+  ========================= -->
+
+  <div id="filters">
+
+
+    <!-- TRENDING -->
+
+    <a
+      href="/listings?category=trending"
+      class="filter <%= category === 'trending' ? 'active' : '' %>"
+    >
+      <div>
+        <i class="fa-solid fa-fire"></i>
+      </div>
+
+      <p>Trending</p>
+    </a>
+
+
+    <!-- ROOMS -->
+
+    <a
+      href="/listings?category=rooms"
+      class="filter <%= category === 'rooms' ? 'active' : '' %>"
+    >
+      <div>
+        <i class="fa-solid fa-bed"></i>
+      </div>
+
+      <p>Rooms</p>
+    </a>
+
+
+    <!-- ICONIC CITIES -->
+
+    <a
+      href="/listings?category=iconic-cities"
+      class="filter <%= category === 'iconic-cities' ? 'active' : '' %>"
+    >
+      <div>
+        <i class="fa-solid fa-mountain-city"></i>
+      </div>
+
+      <p>Iconic Cities</p>
+    </a>
+
+
+    <!-- MOUNTAINS -->
+
+    <a
+      href="/listings?category=mountains"
+      class="filter <%= category === 'mountains' ? 'active' : '' %>"
+    >
+      <div>
+        <i class="fa-solid fa-mountain"></i>
+      </div>
+
+      <p>Mountains</p>
+    </a>
+
+
+    <!-- CASTLES -->
+
+    <a
+      href="/listings?category=castles"
+      class="filter <%= category === 'castles' ? 'active' : '' %>"
+    >
+      <div>
+        <i class="fa-brands fa-fort-awesome"></i>
+      </div>
+
+      <p>Castles</p>
+    </a>
+
+
+    <!-- AMAZING POOLS -->
+
+    <a
+      href="/listings?category=amazing-pools"
+      class="filter <%= category === 'amazing-pools' ? 'active' : '' %>"
+    >
+      <div>
+        <i class="fa-solid fa-person-swimming"></i>
+      </div>
+
+      <p>Amazing Pools</p>
+    </a>
+
+
+    <!-- CAMPING -->
+
+    <a
+      href="/listings?category=camping"
+      class="filter <%= category === 'camping' ? 'active' : '' %>"
+    >
+      <div>
+        <i class="fa-solid fa-campground"></i>
+      </div>
+
+      <p>Camping</p>
+    </a>
+
+
+    <!-- FARMS -->
+
+    <a
+      href="/listings?category=farms"
+      class="filter <%= category === 'farms' ? 'active' : '' %>"
+    >
+      <div>
+        <i class="fa-solid fa-cow"></i>
+      </div>
+
+      <p>Farms</p>
+    </a>
+
+
+    <!-- ARCTIC -->
+
+    <a
+      href="/listings?category=arctic"
+      class="filter <%= category === 'arctic' ? 'active' : '' %>"
+    >
+      <div>
+        <i class="fa-solid fa-snowflake"></i>
+      </div>
+
+      <p>Arctic</p>
+    </a>
+
+
+    <!-- TAX TOGGLE -->
+
+    <div class="tax-toggle">
+
+      <div class="form-check form-switch">
+
+        <input
+          class="form-check-input"
+          type="checkbox"
+          role="switch"
+          id="flexSwitchCheckDefault"
+        />
+
+        <label
+          class="form-check-label"
+          for="flexSwitchCheckDefault"
+        >
+          Display total after taxes
+        </label>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       SEARCH RESULT
+  ========================= -->
+
+  <% if (searchQuery) { %>
+
+    <div class="search-result">
+
+      <% if (allListings.length > 0) { %>
+
+        <h4>
+          Search results for "<%= searchQuery %>"
+        </h4>
+
+        <p>
+          <%= allListings.length %>
+          listing<%= allListings.length === 1 ? "" : "s" %> found
+        </p>
+
+      <% } %>
+
+    </div>
+
+  <% } %>
+
+
+  <!-- =========================
+       LISTINGS
+  ========================= -->
+
+  <div class="listings-grid">
+
+
+    <!-- NO LISTINGS -->
+
+    <% if (allListings.length === 0) { %>
+
+      <div class="no-listings">
+
+        <h4>
+          No listings found!
+        </h4>
+
+
+        <% if (searchQuery) { %>
+
+          <p>
+            We couldn't find any listings matching
+            "<b><%= searchQuery %></b>".
+          </p>
+
+          <a
+            href="/listings"
+            class="btn btn-dark"
+          >
+            View All Listings
+          </a>
+
+
+        <% } else if (category) { %>
+
+          <p>
+            No listings are available in the
+            <b><%= category %></b>
+            category.
+          </p>
+
+          <a
+            href="/listings"
+            class="btn btn-dark"
+          >
+            View All Listings
+          </a>
+
+
+        <% } else { %>
+
+          <p>
+            There are currently no listings available.
+          </p>
+
+        <% } %>
+
+      </div>
+
+    <% } %>
+
+
+    <!-- LISTINGS -->
+
+    <% for (let listing of allListings) { %>
+
+      <a
+        href="/listings/<%= listing._id %>"
+        class="listing-link"
+      >
+
+        <div class="card listing-card">
+
+
+          <!-- IMAGE -->
+
+          <img
+            src="<%= listing.image.url %>"
+            class="card-img-top"
+            alt="<%= listing.title %>"
+          />
+
+
+          <!-- IMAGE OVERLAY -->
+
+          <div class="card-img-overlay"></div>
+
+
+          <!-- CARD BODY -->
+
+          <div class="card-body">
+
+            <p class="card-text">
+
+              <b>
+                <%= listing.title %>
+              </b>
+
+              <br />
+
+
+              <!-- PRICE -->
+
+              <span
+                class="listing-price"
+                data-base-price="<%= listing.price %>"
+              >
+                &#8377;
+                <%= listing.price.toLocaleString("en-IN") %>
+                / night
+              </span>
+
+
+              <!-- TAX INFO -->
+
+              <span class="tax-info">
+                &nbsp;including taxes
+              </span>
+
+            </p>
+
+          </div>
+
+        </div>
+
+      </a>
+
+    <% } %>
+
+  </div>
+
+</div>
