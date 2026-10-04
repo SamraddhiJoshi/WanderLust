@@ -168,3 +168,178 @@ body {
   height: 400px;
   width: 100%;
 }
+
+/* =========================
+   MOBILE RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 768px) {
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    .navbar {
+        height: auto;
+        min-height: 4rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+    .fa-compass {
+        font-size: 1.7rem;
+    }
+
+
+    /* =========================
+       CONTAINER
+    ========================= */
+
+    .container {
+        width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+
+    /* =========================
+       LISTING CARDS
+    ========================= */
+
+    .listing-card {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-bottom: 1.5rem;
+    }
+
+    .card-img-top {
+        height: 16rem !important;
+        border-radius: 0.75rem !important;
+    }
+
+
+    /* =========================
+       SHOW PAGE
+    ========================= */
+
+    .show-card {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .show-img {
+        height: 14rem !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+
+
+    /* =========================
+       TITLE / CONTENT
+    ========================= */
+
+    .col-8.offset-3 {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+
+    .col-6.offset-3 {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+
+    /* =========================
+       EDIT / DELETE BUTTONS
+    ========================= */
+
+    .btns {
+        width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .btns .btn {
+        min-width: 90px;
+    }
+
+
+    /* =========================
+       REVIEWS
+    ========================= */
+
+    .card.col-5 {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+
+    /* =========================
+       MAP
+    ========================= */
+
+    #map {
+        height: 300px;
+        width: 100%;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .f-info {
+        height: auto;
+        min-height: 10rem;
+        padding: 1.5rem 1rem;
+        gap: 1rem;
+    }
+
+    .f-info-links,
+    .f-info-socials,
+    .f-info-brand {
+        width: 100%;
+    }
+
+
+    /* =========================
+       FORMS
+    ========================= */
+
+    form {
+        max-width: 100%;
+    }
+
+    input,
+    textarea,
+    select {
+        max-width: 100%;
+    }
+
+
+    /* =========================
+       HEADINGS
+    ========================= */
+
+    h3 {
+        font-size: 1.4rem;
+    }
+
+    h4 {
+        font-size: 1.2rem;
+    }
+
+}

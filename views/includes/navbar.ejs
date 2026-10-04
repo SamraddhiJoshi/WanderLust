@@ -4,6 +4,7 @@
         color: #fff;
         border-radius: 25px;
         padding: 0 1rem;
+        white-space: nowrap;
     }
 
     .btn-search:hover {
@@ -18,8 +19,77 @@
 
     .search-inp {
         border-radius: 25px;
-        padding: 0.5rem 3rem;
+        padding: 0.5rem 1rem;
         font-size: 1rem;
+    }
+
+    /* MOBILE NAVBAR */
+    @media (max-width: 767px) {
+
+        .navbar {
+            padding: 0.6rem 0.75rem;
+        }
+
+        .navbar .container-fluid {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .navbar-collapse {
+            padding-top: 1rem;
+        }
+
+        /* Search */
+        .navbar-collapse .navbar-nav.ms-auto:first-of-type {
+            width: 100%;
+            margin-bottom: 0.75rem;
+        }
+
+        .navbar-collapse form {
+            width: 100%;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .search-inp {
+            width: 100%;
+            min-width: 0;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-search {
+            padding: 0 0.9rem;
+        }
+
+        .btn-search i {
+            margin-right: 0.25rem;
+        }
+
+        /* User links */
+        .navbar-collapse > .navbar-nav:last-child {
+            margin-left: 0 !important;
+        }
+
+        .navbar-collapse .nav-link {
+            padding: 0.65rem 0;
+        }
+    }
+
+    /* Very small screens */
+    @media (max-width: 400px) {
+
+        .search-inp {
+            font-size: 0.9rem;
+        }
+
+        .btn-search {
+            font-size: 0.9rem;
+            padding: 0 0.7rem;
+        }
+
+        .btn-search i {
+            display: none;
+        }
     }
 </style>
 
@@ -42,6 +112,9 @@
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
         >
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -86,13 +159,11 @@
                         aria-label="Search destinations"
                     />
 
-
                     <button
                         class="btn btn-search"
                         type="submit"
                     >
                         <i class="fa-solid fa-magnifying-glass"></i>
-
                         Search
                     </button>
 
@@ -121,7 +192,6 @@
                     >
                         <b>Sign up</b>
                     </a>
-
 
                     <a
                         class="nav-link"
