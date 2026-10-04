@@ -52,7 +52,7 @@ const store = MongoStore.create({
   touchAfter: 24 * 60 * 60, // time period in seconds
 });
 
-store.on("error", () => {
+store.on("error", (err) => {
   console.error("ERROR IN MONGO SESSION STORE", err);
 });
 
@@ -98,9 +98,9 @@ app.use((req, res, next) => {
 // ==========================================
 // 2. ROUTES
 // ==========================================
-// app.get("/", (req, res) => {
-//   res.send("Hi, I am root");
-// });
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
